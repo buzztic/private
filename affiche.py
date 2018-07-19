@@ -84,9 +84,9 @@ movies.to_excel(writer, sheet_name='Sheet1')
 workbook  = writer.book
 worksheet = workbook.get_worksheet_by_name('Sheet1')
 # Widen the first column to make the text clearer.
-worksheet.set_column(10, 10, 15)
+worksheet.set_column(10, 10, 30)
 for i in range(0, 500):
-    worksheet.set_row(i, 90)
+    worksheet.set_row(i, 80)
 
 # Insert an image.
 cell_names = ['K'+str(i) for i in range(1,500)]
