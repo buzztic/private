@@ -1,44 +1,37 @@
 #!/usr/bin/env bash
-# Setup script for setting up a new macos machine
-echo "Starting setup"
-# install xcode CLI
-xcode-select —-install
-# Check for Homebrew to be present, install if it's missing
-if test ! $(which brew); then
-    echo "Installing homebrew..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+############################
+# This script creates symlinks from the home directory to any desired dotfiles in ${homedir}/dotfiles
+# And also installs Homebrew Packages
+############################
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: install.sh <home_directory>"
+    exit 1
 fi
 
-# Update homebrew recipes
-brew update
+homedir=$1
 
-PACKAGES=(
-    git
-    python@3.12
-    ipython
-    grep
-)
-echo "Installing packages..."
-brew install ${PACKAGES[@]}
+# dotfiles directory
+dotfiledir=${homedir}/dotfiles
 
-echo "Cleaning up..."
-brew cleanup
+# list of files/folders to symlink in ${homedir}
+files="bash_profile bashrc aliases"
 
-echo "Installing cask..."
-CASKS=(
-    slack
-    spotify
-    cursor
-    1password
-    notion
-    brave-browser
-    onyx
-)
-echo "Installing cask apps..."
-brew cask install ${CASKS[@]}
+# change to the dotfiles directory
+echo "Changing to the ${dotfiledir} directory"
+cd ${dotfiledir}
+echo "...done"
 
-echo "Intalling fancy git"
+# create symlinks (will overwrite old dotfiles)
+for file in ${files}; do
+    echo "Creating symlink to $file in home directory."
+    ln -sf ${dotfiledir}/.${file} ${homedir}/.${file}
+done
+
+# Intalling fancy git
 curl -sS https://raw.githubusercontent.com/diogocavilha/fancy-git/master/install.sh | sh
 
+# # Run the Homebrew Script
+./brew.sh
 
 echo "Macbook setup completed!"
