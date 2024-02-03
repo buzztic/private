@@ -10,12 +10,13 @@ if [ "$#" -ne 1 ]; then
 fi
 
 homedir=$1
+gitdir=$2
 
 # dotfiles directory
-dotfiledir=${homedir}/dotfiles
+dotfiledir=${homedir}/Documents/github/private/install
 
 # list of files/folders to symlink in ${homedir}
-files="bash_profile bashrc aliases"
+files="bash_profile bashrc"
 
 # change to the dotfiles directory
 echo "Changing to the ${dotfiledir} directory"

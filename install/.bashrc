@@ -4,6 +4,8 @@
 alias hg='history | grep'
 # alias kill_all_docker="docker kill $(docker ps -q)"
 alias gogit="cd ~/Documents/GitHub/"
+alias goprivate="cd ~/Documents/github/private/"
+
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
